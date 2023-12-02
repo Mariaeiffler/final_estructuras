@@ -38,3 +38,4 @@ def entrar(self):
         print('Se ha cerrado la sesión con éxito.')
         
 if __name__ == "__main__":
+    print('hola')
