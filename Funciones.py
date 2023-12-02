@@ -5,8 +5,7 @@ def obtener_pickle(hotel, accion): #cambiar cuando sepamos
         try:
             with open ('final.pickle','rb') as fpickle:
                 info = pickle.load(fpickle)
-            hotel.empleados = info.empleados
-            hotel.clientes = info.clientes
+            #agregar las cosas a cargar
 
         except FileNotFoundError:
             with open ('final.pickle','wb') as fpickle:
