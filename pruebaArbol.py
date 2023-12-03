@@ -1,4 +1,6 @@
 from Proyecto import *
+from FuncionesFinal import *
+
 class Nodo:
     def __init__(self, valor):
         self.valor = valor
@@ -9,7 +11,7 @@ def insertar(raiz, valor:Proyecto):
     if raiz is None:
         return Nodo(valor)
     else:
-        if valor < raiz.valor:
+        if convertirfecha_datetime(valor.fecha_inicio) < raiz.convertirfecha_datetime(valor.fecha_inicio):
             raiz.izquierda = insertar(raiz.izquierda, valor)
         else:
             raiz.derecha = insertar(raiz.derecha, valor)
