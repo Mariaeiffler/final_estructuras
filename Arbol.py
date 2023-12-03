@@ -33,8 +33,8 @@ class Arbolito:
             
             
 class Arbol():
-    def __init__(self,nodo=None):
-        self.raiz=nodo
+    def __init__(self):
+        self.raiz=None
     # agregar al arbol
     def agregarNodo(self,nodo):
         if self.raiz==None:
@@ -63,7 +63,8 @@ class Arbol():
             print(nodo.dato)
 
 if __name__=='__main__':
-    roble=Arbol
-    roble.agregarNodo('2002/12/23')
-    roble.recorrer_inorden()
+    roble=Arbol()
+    nodo=Nodo('2002/12/23')
+    roble.agregarNodo(nodo)
+    roble.inorder()
     
