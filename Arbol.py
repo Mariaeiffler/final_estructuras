@@ -5,6 +5,9 @@ from Nodo import *
 class Arbol:
     def __init__(self,raiz):
         self.raiz = raiz
+class Arbolito:
+    def __init__(self):
+        self.raiz = None
 
     def insertar(self, valor):
         self.raiz = self._insertar(self.raiz, valor)
@@ -28,9 +31,43 @@ class Arbol:
             self._recorrer_inorden(raiz.izquierda)
             print(raiz.valor, end=' ')
             self._recorrer_inorden(raiz.derecha)
+            
+            
+            
+            
+class Arbol():
+    def __init__(self):
+        self.raiz=None
+    # agregar al arbol
+    def agregarNodo(self,nodo):
+        if self.raiz==None:
+            self.raiz=nodo
+        else:
+            raiz=self.raiz
+            #NodoArbol.agregarnodos(raiz,nodo)
+            raiz.agregarnodos(nodo)
+    # Mostrar el arbol en preorden
+    def preorder(self,nodo):
+        if nodo:
+            print(self,nodo.dato)
+            self.preorder(nodo.izquierdo)
+            self.preorder(nodo.derecho)
+    # Mostrar el arbol en inorden
+    def inorder(self,nodo):
+        if(nodo):
+            self.inorder(nodo.izquierdo)
+            print(nodo.dato)
+            self.inorder(nodo.derecho)
+    # Mostrar ecuacion en postorden
+    def posorden(self,nodo):
+        if nodo:
+            self.posorden(nodo.izquierdo)
+            self.posorden(nodo.derecho)
+            print(nodo.dato)
 
 if __name__=='__main__':
-    roble=Arbol
-    roble.insertar('2002/12/23')
-    roble.recorrer_inorden()
+    roble=Arbol()
+    nodo=Nodo('2002/12/23')
+    roble.agregarNodo(nodo)
+    roble.inorder()
     
