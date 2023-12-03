@@ -90,21 +90,27 @@ def crear_diccionario_proy(moneda:dict,tipo_proy:dict,estado:dict,disciplina:dic
         '2016':{},
         '2017':{},
         '2018':{}}
-    lista = leer_archivo('proyectos_2015.csv')
-    proyectos = crear_clase_proyecto(lista,moneda,tipo_proy,estado,2015,disciplina,proyectos)
-    lista = leer_archivo('proyectos_2016.csv')
-    proyectos = crear_clase_proyecto(lista,moneda,tipo_proy,estado,2016,disciplina,proyectos)
-    lista = leer_archivo('proyectos_2017.csv')
-    proyectos = crear_clase_proyecto(lista,moneda,tipo_proy,estado,2017,disciplina,proyectos)
-    lista = leer_archivo('proyectos_2018.csv')
-    proyectos = crear_clase_proyecto(lista,moneda,tipo_proy,estado,2018,disciplina,proyectos)
+    setGranAreas=set()
+    lista=list()
+    dicc=dict()
+    for key in disciplina:
+        granArea=disciplina.get(key).gran_area_descripcion
+        setGranAreas.add(granArea)
+    for granAreaLlave in setGranAreas:
+        dicc[granAreaLlave]={}
+    for key in disciplina:
+        if disciplina.get(key).area_descripcion not in lista:
+            lista+=disciplina.get(key).gran_area_descripcion
+            dicc[disciplina.get(key).gran_area_descripcion][disciplina.get(key).area_descripcion]=[]
+    for keys in proyectos:
+        proyectos[keys]=dicc
     return proyectos
-        
-        
-                
-moneda = crear_clase_moneda(leer_archivo('ref_moneda.csv'))
-tipo_proy = crear_clase_tipo_proyecto(leer_archivo('ref_tipo_proyecto.csv'))
-estado = crear_clase_estado_proyecto(leer_archivo('ref_estado_proyecto.csv'))
-disciplina = crear_clase_disciplina(leer_archivo('ref_disciplina.csv'))
-crear_diccionario_proy(moneda,tipo_proy,estado,disciplina)
+
+if __name__=='__main__':
+    moneda = crear_clase_moneda(leer_archivo('ref_moneda.csv'))
+    tipo_proy = crear_clase_tipo_proyecto(leer_archivo('ref_tipo_proyecto.csv'))
+    estado = crear_clase_estado_proyecto(leer_archivo('ref_estado_proyecto.csv'))
+    disciplina = crear_clase_disciplina(leer_archivo('ref_disciplina.csv')) 
+    proyectosDicc=crear_diccionario_proy(moneda,tipo_proy,estado,disciplina)
+    print(proyectosDicc)
 
