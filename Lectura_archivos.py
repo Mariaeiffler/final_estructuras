@@ -125,6 +125,6 @@ def diccionario_proy(arbol):
     return proyectos,arbol
 
 if __name__=='__main__':
-    arbol=Arbol
+    arbol=Arbol(None)
     print(diccionario_proy(arbol))
 

@@ -3,8 +3,8 @@ from FuncionesFinal import *
 from Nodo import *
 
 class Arbol:
-    def __init__(self):
-        self.raiz = None
+    def __init__(self,raiz):
+        self.raiz = raiz
 
     def insertar(self, valor):
         self.raiz = self._insertar(self.raiz, valor)
