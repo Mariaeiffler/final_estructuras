@@ -70,7 +70,10 @@ def crear_clase_proyecto(lista,moneda:dict,tipo_proy:dict,estado:dict,anio,disci
                 id_estado = estado.get(est)
         for dis in lista_disciplinas:
             if dis[0]==proyecto[0]:
-                id_disciplina = disciplina.get(dis[1])
+                if dis[1] == '0':
+                    id_disciplina = disciplina.get('-1')
+                else:
+                    id_disciplina = disciplina.get(dis[1])
         
         proy = Proyecto(proyecto[0],proyecto[1],proyecto[2],proyecto[3],proyecto[4],proyecto[5],id_mon,proyecto[7],proyecto[8],proyecto[9],proyecto[10],id_tipo_proy,proyecto[12],proyecto[13],id_estado,proyecto[15],proyecto[16],proyecto[17],proyecto[18],anio,id_disciplina)
         match anio:
