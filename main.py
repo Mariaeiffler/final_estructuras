@@ -19,7 +19,7 @@ def entrar(self):
                     '''Visualizar el porcentaje de participación de las mujeres versus la participación de los hombres en los diferentes proyectos'''
                     pregunta=menuPPL()
                 case 3:
-                     '''Visualizar el tiempo promedio de terminación de los proyectos según el sub área al que pertenecen'''
+                    '''Visualizar el tiempo promedio de terminación de los proyectos según el sub área al que pertenecen'''
                     pregunta=menuPPL() 
                 case 4:
                     '''Visualizar el porcentaje de los proyectos que han utilizado tecnologías emergentes'''

@@ -6,7 +6,7 @@ class Disciplina():
         self.gran_area_descripcion = gran_area_descripcion
         self.area_codigo = area_codigo
         self.area_descripcion = area_descripcion
-        self.disciplina_codiga = disciplina_codigo
+        self.disciplina_codigo = disciplina_codigo
         self.disciplina_descripcion = disciplina_descripcion
         
     def __str__(self):

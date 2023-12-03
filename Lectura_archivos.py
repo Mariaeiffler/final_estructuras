@@ -106,5 +106,5 @@ moneda = crear_clase_moneda(leer_archivo('ref_moneda.csv'))
 tipo_proy = crear_clase_tipo_proyecto(leer_archivo('ref_tipo_proyecto.csv'))
 estado = crear_clase_estado_proyecto(leer_archivo('ref_estado_proyecto.csv'))
 disciplina = crear_clase_disciplina(leer_archivo('ref_disciplina.csv'))
-print(crear_diccionario_proy(moneda,tipo_proy,estado,disciplina))
+crear_diccionario_proy(moneda,tipo_proy,estado,disciplina)
 
