@@ -36,7 +36,7 @@ class Arbol():
     def __init__(self,nodo=None):
         self.raiz=nodo
     # agregar al arbol
-    def agregarnodo(self,nodo):
+    def agregarNodo(self,nodo):
         if self.raiz==None:
             self.raiz=nodo
         else:
@@ -64,6 +64,6 @@ class Arbol():
 
 if __name__=='__main__':
     roble=Arbol
-    roble.insertar('2002/12/23')
+    roble.agregarNodo('2002/12/23')
     roble.recorrer_inorden()
     
