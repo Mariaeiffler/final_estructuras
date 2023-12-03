@@ -87,7 +87,7 @@ def crear_clase_proyecto(lista,moneda:dict,tipo_proy:dict,estado:dict,anio,disci
                 proyectos['2018'][proy.disciplina.gran_area_descripcion][proy.disciplina.area_descripcion]=proy
     return proyectos
 
-def crear_diccionario_proy(disciplina:dict):
+def crear_diccionario_proy_vacio(disciplina:dict):
     proyectos = {
         '2015':{},
         '2016':{},
@@ -109,15 +109,20 @@ def crear_diccionario_proy(disciplina:dict):
         proyectos[keys]=dicc
     return proyectos
 
-if __name__=='__main__':
+def diccionario_proy():
     moneda = crear_clase_moneda(leer_archivo('ref_moneda.csv'))
     tipo_proy = crear_clase_tipo_proyecto(leer_archivo('ref_tipo_proyecto.csv'))
     estado = crear_clase_estado_proyecto(leer_archivo('ref_estado_proyecto.csv'))
     disciplina = crear_clase_disciplina(leer_archivo('ref_disciplina.csv')) 
-    proyectosDicc=crear_diccionario_proy(disciplina)
-    proyectos=crear_clase_proyecto(leer_archivo('proyectos_2015.csv'),moneda,tipo_proy,estado,'2015',disciplina,proyectosDicc)
-    proyectos=crear_clase_proyecto(leer_archivo('proyectos_2016.csv'),moneda,tipo_proy,estado,'2016',disciplina,proyectosDicc)
-    proyectos=crear_clase_proyecto(leer_archivo('proyectos_2017.csv'),moneda,tipo_proy,estado,'2017',disciplina,proyectosDicc)
-    proyectos=crear_clase_proyecto(leer_archivo('proyectos_2018.csv'),moneda,tipo_proy,estado,'2018',disciplina,proyectosDicc)
-    print(proyectos)
+    proyectosDicc=crear_diccionario_proy_vacio(disciplina)
+    anio = 2015
+    while anio <= 2018:
+        nombre = 'proyectos_'+str(anio)+'.csv'
+        proyectos=crear_clase_proyecto(leer_archivo(nombre),moneda,tipo_proy,estado,str(anio),disciplina,proyectosDicc)
+        anio +=1
+    return proyectos
+
+if __name__=='__main__':
+    
+    print(diccionario_proy())
 
