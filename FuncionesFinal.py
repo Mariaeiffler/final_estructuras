@@ -1,5 +1,5 @@
 import pickle
-import datetime
+from datetime import *
 
 def obtener_pickle(hotel, accion): #cambiar cuando sepamos 
     if accion == 'abrir':
@@ -49,7 +49,7 @@ def convertirfecha_datetime(fecha):
     validacion = False
     while validacion == False:
         try:
-            fecha_datetime = datetime.strptime(fecha, '%Y/%m/%d %H:%M:%S.%f')
+            fecha_datetime = datetime.strptime(fecha,'%Y/%m/%d %H:%M:%S.%f')
             validacion = True
             return fecha_datetime
         except Exception:
