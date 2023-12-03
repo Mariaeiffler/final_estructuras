@@ -1,4 +1,5 @@
 import pickle
+import datetime
 
 def obtener_pickle(hotel, accion): #cambiar cuando sepamos 
     if accion == 'abrir':
@@ -43,6 +44,17 @@ def menuPPL():
     imprimir = 'Error. Elija una de las siguientes opciones: \n 1. Mostrar la distribución de los proyectos por área de investigación y sus correspondientes sub áreas  \n 2. Visualizar el porcentaje de participación de las mujeres versus la participación de los hombres en los diferentes proyectos \n 3. Visualizar el tiempo promedio de terminación de los proyectos según el sub área al que pertenecen \n 4. Visualizar el porcentaje de los proyectos que han utilizado tecnologías emergentes \n 5. Guardar y visualizar una lista de proyectos ordenados por la fecha de inicialización \n 6. Visualizar la relación entre el monto de financiamiento solicitado y el monto de financiamiento otorgado \n 7. Salir del programa \n'
     pregunta=val_opc(pregunta,1,7,imprimir)
     return pregunta
+
+def convertirfecha_datetime(fecha):
+    '''Esta función convierte una fecha dada en formato datetime'''
+    validacion = False
+    while validacion == False:
+        try:
+            fecha_datetime = datetime.strptime(fecha, '%Y/%m/%d')
+            validacion = True
+            return fecha_datetime
+        except Exception:
+            fecha = input('Ingrese la fecha en el formato dd/mm/aaaa: ')
 
 if __name__ == '__main__':
     print(menuPPL())
