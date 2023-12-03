@@ -74,17 +74,17 @@ def crear_clase_proyecto(lista,moneda:dict,tipo_proy:dict,estado:dict,anio,disci
         
         proy = Proyecto(proyecto[0],proyecto[1],proyecto[2],proyecto[3],proyecto[4],proyecto[5],id_mon,proyecto[7],proyecto[8],proyecto[9],proyecto[10],id_tipo_proy,proyecto[12],proyecto[13],id_estado,proyecto[15],proyecto[16],proyecto[17],proyecto[18],anio,id_disciplina)
         match anio:
-            case 2015:
+            case '2015':
                 proyectos['2015'][proy.disciplina.gran_area_descripcion][proy.disciplina.area_descripcion]=proy
-            case 2016:
+            case '2016':
                 proyectos['2016'][proy.disciplina.gran_area_descripcion][proy.disciplina.area_descripcion]=proy
-            case 2017:
+            case '2017':
                 proyectos['2017'][proy.disciplina.gran_area_descripcion][proy.disciplina.area_descripcion]=proy
-            case 2018:
+            case '2018':
                 proyectos['2018'][proy.disciplina.gran_area_descripcion][proy.disciplina.area_descripcion]=proy
     return proyectos
 
-def crear_diccionario_proy(moneda:dict,tipo_proy:dict,estado:dict,disciplina:dict):
+def crear_diccionario_proy(disciplina:dict):
     proyectos = {
         '2015':{},
         '2016':{},
@@ -111,7 +111,7 @@ if __name__=='__main__':
     tipo_proy = crear_clase_tipo_proyecto(leer_archivo('ref_tipo_proyecto.csv'))
     estado = crear_clase_estado_proyecto(leer_archivo('ref_estado_proyecto.csv'))
     disciplina = crear_clase_disciplina(leer_archivo('ref_disciplina.csv')) 
-    proyectosDicc=crear_diccionario_proy(moneda,tipo_proy,estado,disciplina)
+    proyectosDicc=crear_diccionario_proy(disciplina)
     proyectos=crear_clase_proyecto(leer_archivo('proyectos_2015.csv'),moneda,tipo_proy,estado,'2015',disciplina,proyectosDicc)
     proyectos=crear_clase_proyecto(leer_archivo('proyectos_2016.csv'),moneda,tipo_proy,estado,'2016',disciplina,proyectosDicc)
     proyectos=crear_clase_proyecto(leer_archivo('proyectos_2017.csv'),moneda,tipo_proy,estado,'2017',disciplina,proyectosDicc)
