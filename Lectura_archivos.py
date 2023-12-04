@@ -63,11 +63,10 @@ def crear_clase_tipo_proyecto(lista):
         tipo_proy[list[0]]=tipo
     return tipo_proy
 
-def crear_clase_proyecto(lista,moneda:dict,tipo_proy:dict,estado:dict,anio,disciplina:dict,proyectos:dict):
+def crear_clase_proyecto(lista,moneda:dict,tipo_proy:dict,estado:dict,anio,disciplina:dict,proyectos:dict,arbol):
     '''La funcion crea los objetos de los proyectos y los guarda en el diccionario de proyectos (segun el año, gran area y subarea). Ademas, crea 
     el arbol para ordenar por fecha de inicio los distintos proyectos.'''
     lista_disciplinas = leer_archivo('proyecto_disciplina.csv')
-    arbol=Arbol()
     for proyecto in lista:
         for mon in moneda:
             if proyecto[6]==mon:
@@ -114,6 +113,7 @@ def crear_diccionario_proy_vacio(disciplina:dict):
 
 def diccionario_proy():
     '''La funcion crea los diccionarios del trabajo. Lee los distintos archivos y los devuelve para que puedan ser guardados en el pickle.  '''
+    arbol=Arbol()
     moneda = crear_clase_moneda(leer_archivo('ref_moneda.csv'))
     tipo_proy = crear_clase_tipo_proyecto(leer_archivo('ref_tipo_proyecto.csv'))
     estado = crear_clase_estado_proyecto(leer_archivo('ref_estado_proyecto.csv'))
@@ -122,7 +122,8 @@ def diccionario_proy():
     anio = 2015
     while anio <= 2018:
         nombre = 'proyectos_'+str(anio)+'.csv'
-        proyectos,arbol=crear_clase_proyecto(leer_archivo(nombre),moneda,tipo_proy,estado,str(anio),disciplina,proyectosDicc)
+        proyectos,arbol=crear_clase_proyecto(leer_archivo(nombre),moneda,tipo_proy,estado,str(anio),disciplina,proyectosDicc,arbol)
         anio +=1
+    arbol.printear()
     return moneda,tipo_proy,estado,disciplina,proyectos,arbol
 

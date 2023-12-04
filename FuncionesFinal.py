@@ -46,18 +46,22 @@ def anios_punto5():
     pregunta=input(('Elija de que anios quiere ver los proyectos: \n 1. 2015  \n 2. 2016 \n 3. 2017 \n 4. 2018 \n 5. todos \n'))
     imprimir = 'Error. Elija de que anios quiere ver los proyectos: \n 1. 2015  \n 2. 2016 \n 3. 2017 \n 4. 2018 \n 5. todos \n'
     pregunta=val_opc(pregunta,1,5,imprimir)
-    anios = []
+    anios = set()
     match pregunta:
         case 1:
-            anios.append(2015)
+            anios.add(2015)
         case 2:
-            anios.append(2016)
+            anios.add(2016)
         case 3:
-            anios.append(2017)
+            anios.add(2017)
         case 4:
-            anios.append(2018)
+            anios.add(2018)
         case 5:
-            anios.append(2015,2016,2017,2018)
+            anios.add(2015)
+            anios.add(2016)
+            anios.add(2017)
+            anios.add(2018)
+    print(anios)
     return anios
 
 def proyectos_sin_repetir(proyectos:dict):
@@ -212,7 +216,7 @@ def porcentaje_subareas(trabajo):
         print(l)
     aprobado = True
     while aprobado:
-        g_area = input('Ingrese el area en la que quiera mostrar la distrbucion de los proyectos')
+        g_area = input('Ingrese el area en la que quiera mostrar la distrbucion de los proyectos \n')
         g_area = g_area.upper()
         for i in lista_areas:
             if i == g_area:
@@ -234,7 +238,6 @@ def porcentaje_subareas(trabajo):
     
     for lista in lista_listas:
         cantidades.append(lista[1])
-    print(cantidades)
     cant = np.array(cantidades)
     porcentajes = (cant/contador)*100     
     return porcentajes, lista_subareas, g_area
@@ -242,9 +245,9 @@ def porcentaje_subareas(trabajo):
 def piecharts_subareas(trabajo):
     porcentajes, lista_subareas, area = porcentaje_subareas(trabajo)
     titulo = "Distribucion de los proyectos segun el subarea de investigacion del area:" + area
-    piechart = plt.pie(porcentajes, labels = lista_subareas,  startangle = 90)
+    plt.pie(porcentajes, labels = None,  startangle = 180)
     plt.title(titulo, loc = 'center', pad= 20)
-    plt.setp(piechart[1], fontsize=8)
+    plt.legend(lista_subareas,  title="Subáreas", bbox_to_anchor=(1, 0.5), loc="center left", fontsize='small')
     plt.show()
     
 def piechartpunto1(trabajo):

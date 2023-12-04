@@ -16,6 +16,7 @@ class Trabajo():
         
     def entrar(self):  
         seguir = True
+        self.arbol.printear()
         pregunta=menuPPL()
         while seguir==True: 
             match pregunta:
@@ -37,9 +38,11 @@ class Trabajo():
                 case 4:
                     '''Visualizar el porcentaje de los proyectos que han utilizado tecnologías emergentes'''
                     tecnologias_emergentes(self.proyectos)
+                    print('Se ha creado un archivo con la informacion que decia visualizar')
                     pregunta=menuPPL()
                 case 5:
                     '''Guardar y visualizar una lista de proyectos ordenados por la fecha de inicialización'''
+                    self.arbol.printear()
                     anios = anios_punto5()
                     self.arbol.recorrer_en_orden(anios)
                     print('Se ha creado un archivo con la información que desea visualizar \n')
