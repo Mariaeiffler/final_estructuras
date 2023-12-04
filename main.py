@@ -51,11 +51,10 @@ class Trabajo():
                     seguir=False   
         print('Se ha cerrado el programa con éxito.')        
         
-def obtener_pickle(): #cambiar cuando sepamos 
+def obtener_pickle():
     try:
         with open ('final.pickle','rb') as fpickle:
             trabajo = pickle.load(fpickle)
-        #agregar las cosas a cargar
 
     except FileNotFoundError:
         moneda,tipo_proy,estado,disciplina,proyectos,arbol=diccionario_proy()
