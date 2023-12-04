@@ -43,9 +43,9 @@ class Arbol:
             
             
 
-if __name__=='__main__':
-    roble=Arbol()
-    nodo=Nodo('2002/12/23')
-    roble.agregarNodo(nodo)
-    roble.inorder()
+# if __name__=='__main__':
+#     roble=Arbol()
+#     nodo=Nodo('2002/12/23')
+#     roble.agregarNodo(nodo)
+#     roble.inorder()
     

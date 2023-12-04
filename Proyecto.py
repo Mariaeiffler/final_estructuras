@@ -1,5 +1,6 @@
 from datetime import *
 from FuncionesFinal import *
+from unidecode import unidecode
 
 class Proyecto():
     def __init__(self,proyecto_id,proyecto_fuente,titulo,fecha_inicio,fecha_finalizacion,resumen,moneda_id,monto_total_solicitado,monto_total_adjudicado,monto_financiado_solicitado,monto_financiado_adjudicado,tipo_proyecto_id,codigo_identificacion,palabras_clave,estado_id,fondo_anpcyt,cantidad_miembros_F,cantidad_miembros_M,sexo_director,anio,disciplina):
@@ -28,4 +29,4 @@ class Proyecto():
     #     return 'El proyecto numero {}, de titulo {}, con fecha inicio {} y fecha fin {}, de tipo {}'.format(self.proyecto_id, self.titulo, self.fecha_inicio, self.fecha_finalizacion,self.tipo_proyecto_id.descripcion)
     
     def __str__(self):
-        return ('{} - {}'.format(convertirfecha_datetime(self.fecha_inicio).strftime('%d/%m/%Y'),self.titulo))
+        return ('{} - {}'.format(convertirfecha_datetime(self.fecha_inicio).strftime('%d/%m/%Y'),unidecode(self.titulo)))
