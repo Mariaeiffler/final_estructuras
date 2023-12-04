@@ -1,6 +1,10 @@
 from FuncionesFinal import *
 from Arbol import *
 from Lectura_archivos import *
+import numpy as np
+import matplotlib.pyplot as plt
+import sys
+sys.setrecursionlimit(5000)
 
 class Trabajo():
     def __init__(self,moneda,tipo_proy,estado,disciplina,proyectos,arbol):
@@ -9,10 +13,9 @@ class Trabajo():
         self.estado=estado
         self.disciplina=disciplina
         self.proyectos=proyectos
-        self.arbol=diccionario_proy()
-
-    def entrar(self): 
-        obtener_pickle(self, 'abrir') 
+        self.arbol=arbol
+        
+    def entrar(self):  
         seguir = True
         pregunta=menuPPL()
         while seguir==True: 
@@ -41,8 +44,6 @@ class Trabajo():
                     pregunta=menuPPL()
                 case 7:
                     seguir=False   
-                           
-        obtener_pickle(self, 'cerrar') 
         print('Se ha cerrado el programa con éxito.')
 
     def porcentaje_hombres_mujeres(self):
@@ -61,8 +62,38 @@ class Trabajo():
         porcentaje_hombres = (hombres/total)*100
         porcentaje_mujeres = (mujeres/total)*100
         return porcentaje_mujeres , porcentaje_hombres
+    
+def obtener_pickle(): #cambiar cuando sepamos 
+    try:
+        with open ('final.pickle','rb') as fpickle:
+            trabajo = pickle.load(fpickle)
+        #agregar las cosas a cargar
+
+    except FileNotFoundError:
+        moneda,tipo_proy,estado,disciplina,proyectos,arbol=diccionario_proy()
+        trabajo=Trabajo(moneda,tipo_proy,estado,disciplina,proyectos,arbol)
+        with open ('final.pickle','wb') as fpickle:
+            pickle.dump(trabajo,fpickle)
+    return trabajo
+
+    
         
+def piechartpunto2(trabajo):
+    mujeres, hombres = trabajo.porcentaje_hombres_mujeres()
+    porcentajes = np.array([hombres,mujeres])
+    labels = ["Hombres", "Mujeres"]
+    explode = [0.1,0]
+    colores = ['b','r']
+    titulo = 'Porcentajes de hombres y mujeres involucrados en proyectos'
+    plt.pie(porcentajes, explode = explode, startangle = 90, shadow = True, colors = colores)
+    plt.legend(labels)
+    plt.title(titulo, loc = 'center', pad = 20)
+    print('El porcentaje de participacion de mujeres es: ', mujeres, '%')
+    print ('El porcentaje de participacion de hombres es: ', hombres, '%')
+    plt.show() 
+
+
 if __name__ == "__main__":
-    moneda,tipo_proy,estado,disciplina,proyectos,arbol=diccionario_proy()
-    trabajo=Trabajo(moneda,tipo_proy,estado,disciplina,proyectos,arbol)
-    trabajo.entrar()
+    obtener_pickle().entrar()
+
+
