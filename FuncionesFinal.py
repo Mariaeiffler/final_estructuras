@@ -8,6 +8,10 @@ def obtener_pickle(trabajo, accion): #cambiar cuando sepamos
                 info = pickle.load(fpickle)
             trabajo.proyectos=info.proyectos
             trabajo.arbol=info.arbol
+            trabajo.moneda=info.moneda
+            trabajo.tipo_proy=info.tipo_proy
+            trabajo.estado=info.estado
+            trabajo.disciplina=info.disciplina
             #agregar las cosas a cargar
 
         except FileNotFoundError:
@@ -17,7 +21,7 @@ def obtener_pickle(trabajo, accion): #cambiar cuando sepamos
         with open ('final.pickle','wb') as fpickle:
             pickle.dump(trabajo,fpickle)
         return
-    
+
 def val_int(x): 
     '''Esta función valida que sea un entero'''
     try:
