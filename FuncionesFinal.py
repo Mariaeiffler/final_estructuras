@@ -147,7 +147,7 @@ def visualizar_tiempo_promedio(trabajo):
         diccionario_nombre[contador2] = nombre_subarea
         contador2+=1
     clave=input("\nIngrese el subarea que desea conocer su tiempo promedio de duracion\n")
-    val_opc(clave,1,43,imprimir)
+    clave=val_opc(clave,1,43,imprimir)
     subarea=diccionario_nombre[int(clave)]
     for año in diccionario.values():
         
@@ -170,7 +170,7 @@ def visualizar_tiempo_promedio(trabajo):
         tiempo_prom=diferencia/contador
         try:
             with open('Tiempo_promedio.txt', "w") as archivo:
-                archivo.write(f"El tiempo promedio del subarea {subarea} es de {tiempo_prom} dias")
+                archivo.write(f"El tiempo promedio del subarea '{subarea}' es de {tiempo_prom} dias")
         except Exception:
             pass
 
