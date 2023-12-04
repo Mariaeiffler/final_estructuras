@@ -1,19 +1,21 @@
 import pickle
 from datetime import *
 
-def obtener_pickle(hotel, accion): #cambiar cuando sepamos 
+def obtener_pickle(trabajo, accion): #cambiar cuando sepamos 
     if accion == 'abrir':
         try:
             with open ('final.pickle','rb') as fpickle:
                 info = pickle.load(fpickle)
+            trabajo.proyectos=info.proyectos
+            trabajo.arbol=info.arbol
             #agregar las cosas a cargar
 
         except FileNotFoundError:
             with open ('final.pickle','wb') as fpickle:
-                pickle.dump(hotel,fpickle)
+                pickle.dump(trabajo,fpickle)
     else:
         with open ('final.pickle','wb') as fpickle:
-            pickle.dump(hotel,fpickle)
+            pickle.dump(trabajo,fpickle)
         return
     
 def val_int(x): 
