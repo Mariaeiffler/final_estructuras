@@ -30,7 +30,6 @@ class Arbol:
                     archivo.write('\n')
         except Exception:
             pass
-        
         print()
 
     def _recorrer_en_orden(self, raiz, anios, lista):
@@ -41,6 +40,16 @@ class Arbol:
                     lista.append(raiz.valor)
                     self._recorrer_en_orden(raiz.derecha,anios,lista)
         return lista
+    
+    def printear(self):
+        self._printear(self.raiz)
+    print()
+
+    def _printear(self, raiz):
+        if raiz:
+            self._printear(raiz.izquierda)
+            print(raiz.valor, end=' ')
+            self._printear(raiz.derecha)
         
             
             
