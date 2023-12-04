@@ -1,6 +1,8 @@
 from FuncionesFinal import *
 from Arbol import *
 from Lectura_archivos import *
+import numpy as np
+import matplotlib.pyplot as plt
 
 class Trabajo():
     def __init__(self):
@@ -52,7 +54,24 @@ class Trabajo():
         porcentaje_hombres = (hombres/total)*100
         porcentaje_mujeres = (mujeres/total)*100
         return porcentaje_mujeres , porcentaje_hombres
+
         
+def piechartpunto2(trabajo):
+    mujeres, hombres = trabajo.porcentaje_hombres_mujeres()
+    porcentajes = np.array([hombres,mujeres])
+    labels = ["Hombres", "Mujeres"]
+    explode = [0.1,0]
+    colores = ['b','r']
+    titulo = 'Porcentajes de hombres y mujeres involucrados en proyectos'
+    plt.pie(porcentajes, explode = explode, startangle = 90, shadow = True, colors = colores)
+    plt.legend(labels)
+    plt.title(titulo, loc = 'center', pad = 20)
+    print('El porcentaje de participacion de mujeres es: ', mujeres, '%')
+    print ('El porcentaje de participacion de hombres es: ', hombres, '%')
+    plt.show() 
+
+
 if __name__ == "__main__":
     trabajo=Trabajo()
     trabajo.entrar()
+
