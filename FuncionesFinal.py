@@ -119,5 +119,23 @@ def porcentaje_hombres_mujeres(proyectos:dict):
 #     plt.show() 
 
 
+def conseguir_nombres(disciplina:dict):
+    setGranAreas=set()
+    lista=list()
+    dicc=dict()
+    lista_subareas=[]
+    for key in disciplina:
+        granArea=disciplina.get(key).gran_area_descripcion
+        setGranAreas.add(granArea)
+    for granAreaLlave in setGranAreas:
+        dicc[granAreaLlave]={}
+    for key in disciplina:
+        if disciplina.get(key).area_descripcion not in lista:
+            dicc[disciplina.get(key).gran_area_descripcion][disciplina.get(key).area_descripcion]=[]
+        if disciplina.get(key).area_descripcion not in lista_subareas:
+            lista_subareas.append(disciplina.get(key).area_descripcion)
+    return dicc,lista_subareas
+
+
 if __name__ == '__main__':
     print(menuPPL())

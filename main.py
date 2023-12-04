@@ -1,6 +1,7 @@
 from FuncionesFinal import *
 from Arbol import *
 from Lectura_archivos import *
+from datetime import datetime as dt
 import sys
 sys.setrecursionlimit(5000)
 
@@ -45,6 +46,48 @@ class Trabajo():
                     seguir=False   
         print('Se ha cerrado el programa con éxito.')        
     
+    def visualizar_tiempo_promedio(self):
+        diccionario=self.proyectos
+        contador=0
+        diferencia=0
+        contador2=1
+        diccionario_nombre={}
+        imprimir="Error. Ingrese una opcion valida"
+        no_uso,lista_nombres=conseguir_nombres(self.disciplina)
+        print("Las posibles subareas son:")
+        for nombre_subarea in lista_nombres:
+            print(f"{contador2}. {nombre_subarea}")
+            diccionario_nombre[contador2] = nombre_subarea
+            contador2+=1
+        clave=input("\nIngrese el subarea que desea conocer su tiempo promedio de duracion\n")
+        val_opc(clave,1,43,imprimir)
+        subarea=diccionario_nombre[int(clave)]
+        for año in diccionario.values():
+            
+            for gran_area in año.values():
+                
+                for area in gran_area:
+
+                    if subarea==area:
+                        
+                        lista_proyectos = gran_area[area]
+                        for proyectos in lista_proyectos:
+                            dif=0
+                            fecha_inicio=dt.strptime(proyectos.fecha_inicio, "%Y/%m/%d %H:%M:%S.%f")
+                            fecha_final=dt.strptime(proyectos.fecha_finalizacion, "%Y/%m/%d %H:%M:%S.%f")
+                            dif=fecha_final-fecha_inicio
+
+                            diferencia+=int(dif.days)
+                            contador+=1
+        if contador!=0:
+            tiempo_prom=diferencia/contador
+            print(f"El tiempo promedio del subarea {subarea} es de {tiempo_prom} dias")
+        
+
+  
+if __name__ == "__main__":
+    trabajo=Trabajo()
+    trabajo.visualizar_tiempo_promedio()
 def obtener_pickle(): #cambiar cuando sepamos 
     try:
         with open ('final.pickle','rb') as fpickle:
