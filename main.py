@@ -4,7 +4,7 @@ from Lectura_archivos import *
 
 class Trabajo():
     def __init__(self):
-        self.proyectos, self.arbol=diccionario_proy()
+        self.moneda,self.tipo_proy,self.estado,self.disciplina,self.proyectos,self.arbol=diccionario_proy()
 
     def entrar(self): 
         obtener_pickle(self, 'abrir') 
@@ -55,6 +55,4 @@ class Trabajo():
         
 if __name__ == "__main__":
     trabajo=Trabajo()
-    #print (trabajo.proyectos)
-    porcentaje_mujeres , porcentaje_hombres = trabajo.porcentaje_hombres_mujeres()
-    print(porcentaje_mujeres,porcentaje_hombres)
+    trabajo.entrar()

@@ -21,22 +21,31 @@ class Arbol:
         return raiz
 
     def recorrer_en_orden(self,anios):
-        self._recorrer_en_orden(self.raiz,anios)
+        lista = []
+        lista = self._recorrer_en_orden(self.raiz,anios,lista)
+        with open('Proyecto_por_fecha.txt', "w") as archivo:
+            for proyecto in lista:
+                archivo.write(proyecto.__str__())
+                archivo.write('\n')
+        
         print()
 
-    def _recorrer_en_orden(self, raiz, anios):
+    def _recorrer_en_orden(self, raiz, anios, lista):
         if raiz:
             for anio in anios:
                 if convertirfecha_datetime(raiz.valor.fecha_inicio).year == anio:
-                    self._recorrer_en_orden(raiz.izquierda)
-                    print(raiz.valor, end='\n')
-                    self._recorrer_en_orden(raiz.derecha)
+                    self._recorrer_en_orden(raiz.izquierda,anios,lista)
+                    lista.append(raiz.valor)
+                    self._recorrer_en_orden(raiz.derecha,anios,lista)
+        return lista
+        
+            
             
             
 
-if __name__=='__main__':
-    roble=Arbol()
-    nodo=Nodo('2002/12/23')
-    roble.agregarNodo(nodo)
-    roble.inorder()
+# if __name__=='__main__':
+#     roble=Arbol()
+#     nodo=Nodo('2002/12/23')
+#     roble.agregarNodo(nodo)
+#     roble.inorder()
     
