@@ -25,8 +25,6 @@ class Proyecto():
         self.sexo_director = sexo_director
         self.anio = anio
         self.disciplina = disciplina
-    # def __str__(self):
-    #     return 'El proyecto numero {}, de titulo {}, con fecha inicio {} y fecha fin {}, de tipo {}'.format(self.proyecto_id, self.titulo, self.fecha_inicio, self.fecha_finalizacion,self.tipo_proyecto_id.descripcion)
-    
+ 
     def __str__(self):
         return ('{} - {}'.format(convertirfecha_datetime(self.fecha_inicio).strftime('%d/%m/%Y'),(self.titulo)))

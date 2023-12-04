@@ -114,9 +114,3 @@ def diccionario_proy():
         anio +=1
     return moneda,tipo_proy,estado,disciplina,proyectos,arbol
 
-if __name__=='__main__':
-    arbol=Arbol(None)
-    dicc, arb = diccionario_proy()
-    anios = [2015,2016]
-    arb.recorrer_en_orden(anios)
-

@@ -1,6 +1,6 @@
 import pickle
 from datetime import *
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import numpy as np
 
 def val_int(x): 
@@ -82,20 +82,6 @@ def porcentaje_hombres_mujeres(proyectos:dict):
     porcentaje_hombres = (hombres/total)*100
     porcentaje_mujeres = (mujeres/total)*100
     return porcentaje_mujeres , porcentaje_hombres
-
-# def piechartpunto2(proyecto:dict):
-#     mujeres, hombres = porcentaje_hombres_mujeres(proyecto)
-#     porcentajes = np.array([hombres,mujeres])
-#     labels = ["Hombres", "Mujeres"]
-#     explode = [0.1,0]
-#     colores = ['b','r']
-#     titulo = 'Porcentajes de hombres y mujeres involucrados en proyectos'
-#     plt.pie(porcentajes, explode = explode, startangle = 90, shadow = True, colors = colores)
-#     plt.legend(labels)
-#     plt.title(titulo, loc = 'center', pad = 20)
-#     print('El porcentaje de participacion de mujeres es: ', mujeres, '%')
-#     print ('El porcentaje de participacion de hombres es: ', hombres, '%')
-#     plt.show() 
 
 
 def conseguir_nombres(disciplina:dict):
@@ -189,7 +175,96 @@ def tecnologias_emergentes(proyectos:dict):
             archivo.write(f'El porcentaje de proyectos que usaron tecnologias emergentes es: {porcentaje} %')
     except Exception:
         pass
+    
+def porcentaje_areas(trabajo):
+    lista_listas = []
+    lista_areas = []
+    cantidades = []
+    lista_proyec = set()
+    for anio in trabajo.proyectos.values():
+        for gran_area in anio.values():
+            for area in gran_area.values():
+                for proyecto_particular in area:
+                    lista_proyec.add(proyecto_particular)
+    for proyec in lista_proyec:
+        if proyec.disciplina.gran_area_descripcion not in lista_areas:
+                lista_areas.append(proyec.disciplina.gran_area_descripcion)
+                lista_listas.append([proyec.disciplina.gran_area_descripcion, 1])
+        else:
+            for lista in lista_listas:
+                if lista[0] == proyec.disciplina.gran_area_descripcion:
+                    lista[1] += 1           
+    total = len(lista_proyec)
+    for lista in lista_listas:
+        cantidades.append(lista[1])
+    cant = np.array(cantidades)
+    porcentajes = (cant/total)*100     
+    return porcentajes, lista_areas
 
+def porcentaje_subareas(trabajo):
+    lista_listas = []
+    lista_subareas = []
+    cantidades = []
+    contador = 0
+    lista_areas = ['SIN DATOS', 'CIENCIAS NATURALES Y EXACTAS', 'CIENCIAS MEDICAS Y DE LA SALUD', 'INGENIERIAS Y TECNOLOGIAS','CIENCIAS AGRICOLAS' ,'CIENCIAS SOCIALES','HUMANIDADES']
+    print('Las siguientes son las areas de investigación:')
+    for l in lista_areas:
+        print(l)
+    aprobado = True
+    while aprobado:
+        g_area = input('Ingrese el area en la que quiera mostrar la distrbucion de los proyectos')
+        g_area = g_area.upper()
+        for i in lista_areas:
+            if i == g_area:
+                aprobado = False
+    proyectos = trabajo.proyectos
+    for anio in proyectos.values():
+        for gran_area in anio.values():
+            for area in gran_area.values():
+                for proyecto_particular in area:
+                    if proyecto_particular.disciplina.gran_area_descripcion == g_area:
+                        if proyecto_particular.disciplina.area_descripcion not in lista_subareas:
+                            lista_subareas.append(proyecto_particular.disciplina.area_descripcion)
+                            lista_listas.append([proyecto_particular.disciplina.area_descripcion, 1])
+                        else:
+                            for lista in lista_listas:
+                                if lista[0] == proyecto_particular.disciplina.area_descripcion:
+                                    lista[1] += 1 
+                        contador += 1
+    
+    for lista in lista_listas:
+        cantidades.append(lista[1])
+    print(cantidades)
+    cant = np.array(cantidades)
+    porcentajes = (cant/contador)*100     
+    return porcentajes, lista_subareas, g_area
 
-if __name__ == '__main__':
-    print(menuPPL())
+def piecharts_subareas(trabajo):
+    porcentajes, lista_subareas, area = porcentaje_subareas(trabajo)
+    titulo = "Distribucion de los proyectos segun el subarea de investigacion del area:" + area
+    piechart = plt.pie(porcentajes, labels = lista_subareas,  startangle = 90)
+    plt.title(titulo, loc = 'center', pad= 20)
+    plt.setp(piechart[1], fontsize=8)
+    plt.show()
+    
+def piechartpunto1(trabajo):
+    porcentajes, lista_areas = porcentaje_areas(trabajo)
+    titulo = "Distribución de los proyectos por Area de investigación"
+    plt.pie(porcentajes, labels = lista_areas,  startangle = 180,autopct='%1.1f%%', pctdistance=0.85)
+    plt.title(titulo, loc = 'center', pad= 20)
+    plt.show()
+    
+def piechartpunto2(proyectos:dict):
+    mujeres, hombres = porcentaje_hombres_mujeres(proyectos)
+    porcentajes = np.array([hombres,mujeres])
+    labels = ["Hombres", "Mujeres"]
+    explode = [0.1,0]
+    colores = ['b','r']
+    titulo = 'Porcentajes de hombres y mujeres involucrados en proyectos'
+    plt.pie(porcentajes, explode = explode, startangle = 90, shadow = True, colors = colores, autopct='%1.1f%%', pctdistance=0.85)
+    plt.legend(labels)
+    plt.title(titulo, loc = 'center', pad = 20)
+    print('El porcentaje de participacion de mujeres es: ', mujeres, '%')
+    print ('El porcentaje de participacion de hombres es: ', hombres, '%')
+    plt.show() 
+
