@@ -123,7 +123,7 @@ def diccionario_proy():
         nombre = 'proyectos_'+str(anio)+'.csv'
         proyectos,arbol=crear_clase_proyecto(leer_archivo(nombre),moneda,tipo_proy,estado,str(anio),disciplina,proyectosDicc)
         anio +=1
-    return proyectos,arbol
+    return moneda,tipo_proy,estado,disciplina,proyectos,arbol
 
 if __name__=='__main__':
     arbol=Arbol(None)
