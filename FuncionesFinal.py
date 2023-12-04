@@ -60,6 +60,25 @@ def convertirfecha_datetime(fecha):
             return fecha_datetime
         except Exception:
             print('no se convirtio')
+            
+def anios_punto5():
+    pregunta=input(('Elija de que anios quiere ver los proyectos: \n 1. 2015  \n 2. 2016 \n 3. 2017 \n 4. 2018 \n 5. todos \n'))
+    imprimir = 'Error. Elija de que anios quiere ver los proyectos: \n 1. 2015  \n 2. 2016 \n 3. 2017 \n 4. 2018 \n 5. todos \n'
+    pregunta=val_opc(pregunta,1,5,imprimir)
+    anios = []
+    match pregunta:
+        case 1:
+            anios.append(2015)
+        case 2:
+            anios.append(2016)
+        case 3:
+            anios.append(2017)
+        case 4:
+            anios.append(2018)
+        case 5:
+            anios.append(2015,2016,2017,2018)
+    return anios
+
 
 if __name__ == '__main__':
     print(menuPPL())
