@@ -126,5 +126,6 @@ def diccionario_proy(arbol):
 
 if __name__=='__main__':
     arbol=Arbol(None)
-    print(diccionario_proy(arbol))
+    dic, arb = diccionario_proy(arbol)
+    arb.recorrer_en_orden()
 

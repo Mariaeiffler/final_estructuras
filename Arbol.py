@@ -13,21 +13,21 @@ class Arbol:
         if raiz is None:
             return Nodo(valor)
         else:
-            if convertirfecha_datetime(valor.fecha_inicio) < convertirfecha_datetime(raiz.valor.fecha_inicio):
+            if convertirfecha_datetime(valor.fecha_inicio) <= convertirfecha_datetime(raiz.valor.fecha_inicio):
                 raiz.izquierda = self._insertar(raiz.izquierda, valor)
             else:
                 raiz.derecha = self._insertar(raiz.derecha, valor)
         return raiz
 
-    def recorrer_inorden(self):
-        self._recorrer_inorden(self.raiz)
+    def recorrer_en_orden(self):
+        self._recorrer_en_orden(self.raiz)
         print()
 
-    def _recorrer_inorden(self, raiz):
+    def _recorrer_en_orden(self, raiz):
         if raiz:
-            self._recorrer_inorden(raiz.izquierda)
-            print(raiz.valor, end=' ')
-            self._recorrer_inorden(raiz.derecha)
+            self._recorrer_en_orden(raiz.izquierda)
+            print(raiz.valor, end='\n')
+            self._recorrer_en_orden(raiz.derecha)
             
             
             

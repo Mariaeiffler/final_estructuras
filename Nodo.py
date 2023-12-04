@@ -1,9 +1,9 @@
 class Nodo ():
     #constructor
-    def __init__(self,dato=None):
-        self.dato=dato
-        self.derecho=None
-        self.izquierdo=None
+    def __init__(self,valor=None):
+        self.valor=valor
+        self.derecha=None
+        self.izquierda=None
     
     def agregarnodos(raiz,nodo):
         if raiz.dato<nodo.dato:
