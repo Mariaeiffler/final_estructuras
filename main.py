@@ -83,11 +83,6 @@ class Trabajo():
             tiempo_prom=diferencia/contador
             print(f"El tiempo promedio del subarea {subarea} es de {tiempo_prom} dias")
         
-
-  
-if __name__ == "__main__":
-    trabajo=Trabajo()
-    trabajo.visualizar_tiempo_promedio()
 def obtener_pickle(): #cambiar cuando sepamos 
     try:
         with open ('final.pickle','rb') as fpickle:
@@ -100,9 +95,7 @@ def obtener_pickle(): #cambiar cuando sepamos
         with open ('final.pickle','wb') as fpickle:
             pickle.dump(trabajo,fpickle)
     return trabajo
-
-    
-        
+ 
 # def piechartpunto2(trabajo):
 #     mujeres, hombres = trabajo.porcentaje_hombres_mujeres()
 #     porcentajes = np.array([hombres,mujeres])
