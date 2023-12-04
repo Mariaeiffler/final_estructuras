@@ -119,7 +119,7 @@ def relacion_monto(proyectos:dict):
     for proy in proyectos:
         monto_solicitado += float(proy.monto_financiado_solicitado)
         monto_otorgado += float(proy.monto_financiado_adjudicado)
-    relacion = monto_otorgado/monto_solicitado
+    relacion = monto_solicitado/monto_otorgado
     try:
         with open('Relación_montos.txt', "w") as archivo:
             archivo.write('El monto total solicitado es: ')
@@ -162,13 +162,14 @@ def visualizar_tiempo_promedio(trabajo):
                     
                     lista_proyectos = gran_area[area]
                     for proyectos in lista_proyectos:
-                        dif=0
-                        fecha_inicio=datetime.strptime(proyectos.fecha_inicio, "%Y/%m/%d %H:%M:%S.%f")
-                        fecha_final=datetime.strptime(proyectos.fecha_finalizacion, "%Y/%m/%d %H:%M:%S.%f")
-                        dif=fecha_final-fecha_inicio
+                        if proyectos.fecha_finalizacion != '':
+                            dif=0
+                            fecha_inicio=datetime.strptime(proyectos.fecha_inicio, "%Y/%m/%d %H:%M:%S.%f")
+                            fecha_final=datetime.strptime(proyectos.fecha_finalizacion, "%Y/%m/%d %H:%M:%S.%f")
+                            dif=fecha_final-fecha_inicio
 
-                        diferencia+=int(dif.days)
-                        contador+=1
+                            diferencia+=int(dif.days)
+                            contador+=1
     if contador!=0:
         tiempo_prom=diferencia/contador
         try:
