@@ -1,4 +1,10 @@
 from FuncionesFinal import *
+from Arbol import *
+
+class Trabajo():
+    def __init__(self):
+        self.proyectos=dict()
+        self.arbol=Arbol()
 
 def entrar(): 
     obtener_pickle(self, 'abrir') #cambiar si no lo hacemos con una clase

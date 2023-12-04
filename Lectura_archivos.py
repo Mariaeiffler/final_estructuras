@@ -80,13 +80,13 @@ def crear_clase_proyecto(lista,moneda:dict,tipo_proy:dict,estado:dict,anio,disci
         arbol.insertar(proy)
         match anio:
             case '2015':
-                proyectos['2015'][proy.disciplina.gran_area_descripcion][proy.disciplina.area_descripcion]=proy
+                proyectos['2015'][proy.disciplina.gran_area_descripcion][proy.disciplina.area_descripcion].append(proy)
             case '2016':
-                proyectos['2016'][proy.disciplina.gran_area_descripcion][proy.disciplina.area_descripcion]=proy
+                proyectos['2016'][proy.disciplina.gran_area_descripcion][proy.disciplina.area_descripcion].append(proy)
             case '2017':
-                proyectos['2017'][proy.disciplina.gran_area_descripcion][proy.disciplina.area_descripcion]=proy
+                proyectos['2017'][proy.disciplina.gran_area_descripcion][proy.disciplina.area_descripcion].append(proy)
             case '2018':
-                proyectos['2018'][proy.disciplina.gran_area_descripcion][proy.disciplina.area_descripcion]=proy
+                proyectos['2018'][proy.disciplina.gran_area_descripcion][proy.disciplina.area_descripcion].append(proy)
     return proyectos,arbol
 
 def crear_diccionario_proy_vacio(disciplina:dict):
@@ -126,6 +126,6 @@ def diccionario_proy(arbol):
 
 if __name__=='__main__':
     arbol=Arbol(None)
-    dic, arb = diccionario_proy(arbol)
-    arb.recorrer_en_orden()
+    dicc, arb = diccionario_proy(arbol)
+    print (dicc)
 
