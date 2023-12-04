@@ -2,7 +2,7 @@ from FuncionesFinal import *
 from Arbol import *
 from Lectura_archivos import *
 import numpy as np
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import sys
 sys.setrecursionlimit(5000)
 
@@ -22,7 +22,7 @@ class Trabajo():
             match pregunta:
                 case 1:
                     '''Mostrar la distribución de los proyectos por área de investigación y sus correspondientes sub áreas'''
-                    print(proyectos.get('2018'))
+                    print(self.proyectos)
                     pregunta=menuPPL()
                 case 2:
                     '''Visualizar el porcentaje de participación de las mujeres versus la participación de los hombres en los diferentes proyectos'''
@@ -78,19 +78,19 @@ def obtener_pickle(): #cambiar cuando sepamos
 
     
         
-def piechartpunto2(trabajo):
-    mujeres, hombres = trabajo.porcentaje_hombres_mujeres()
-    porcentajes = np.array([hombres,mujeres])
-    labels = ["Hombres", "Mujeres"]
-    explode = [0.1,0]
-    colores = ['b','r']
-    titulo = 'Porcentajes de hombres y mujeres involucrados en proyectos'
-    plt.pie(porcentajes, explode = explode, startangle = 90, shadow = True, colors = colores)
-    plt.legend(labels)
-    plt.title(titulo, loc = 'center', pad = 20)
-    print('El porcentaje de participacion de mujeres es: ', mujeres, '%')
-    print ('El porcentaje de participacion de hombres es: ', hombres, '%')
-    plt.show() 
+# def piechartpunto2(trabajo):
+#     mujeres, hombres = trabajo.porcentaje_hombres_mujeres()
+#     porcentajes = np.array([hombres,mujeres])
+#     labels = ["Hombres", "Mujeres"]
+#     explode = [0.1,0]
+#     colores = ['b','r']
+#     titulo = 'Porcentajes de hombres y mujeres involucrados en proyectos'
+#     plt.pie(porcentajes, explode = explode, startangle = 90, shadow = True, colors = colores)
+#     plt.legend(labels)
+#     plt.title(titulo, loc = 'center', pad = 20)
+#     print('El porcentaje de participacion de mujeres es: ', mujeres, '%')
+#     print ('El porcentaje de participacion de hombres es: ', hombres, '%')
+#     plt.show() 
 
 
 if __name__ == "__main__":
