@@ -1,3 +1,0 @@
-El monto total solicitado es: 7999410503.44
-El monto total otorgado es: 8063392394.859998
-La relacion entre el monto otorgado y solicitado es: 1.007998325800693

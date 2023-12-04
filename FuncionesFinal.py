@@ -44,8 +44,8 @@ def convertirfecha_datetime(fecha):
             
 def anios_punto5():
     '''Esta funcion pide los años que se quieren visualizar en el punto 5 del menu.'''
-    pregunta=input(('Elija de que anios quiere ver los proyectos: \n 1. 2015  \n 2. 2016 \n 3. 2017 \n 4. 2018 \n 5. todos \n'))
-    imprimir = 'Error. Elija de que anios quiere ver los proyectos: \n 1. 2015  \n 2. 2016 \n 3. 2017 \n 4. 2018 \n 5. todos \n'
+    pregunta=input(('Elija de que años quiere ver los proyectos: \n 1. 2015  \n 2. 2016 \n 3. 2017 \n 4. 2018 \n 5. todos \n'))
+    imprimir = 'Error. Elija de que años quiere ver los proyectos: \n 1. 2015  \n 2. 2016 \n 3. 2017 \n 4. 2018 \n 5. todos \n'
     pregunta=val_opc(pregunta,1,5,imprimir)
     anios = set()
     match pregunta:
@@ -62,7 +62,6 @@ def anios_punto5():
             anios.add(2016)
             anios.add(2017)
             anios.add(2018)
-    print(anios)
     return anios
 
 def proyectos_sin_repetir(proyectos:dict):
