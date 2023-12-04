@@ -127,5 +127,6 @@ def diccionario_proy(arbol):
 if __name__=='__main__':
     arbol=Arbol(None)
     dicc, arb = diccionario_proy(arbol)
-    print (dicc)
+    anios = [2015,2016]
+    arb.recorrer_en_orden(anios)
 
