@@ -1,5 +1,7 @@
 import pickle
 from datetime import *
+# import matplotlib.pyplot as plt
+import numpy as np
 
 def obtener_pickle(trabajo, accion): #cambiar cuando sepamos 
     if accion == 'abrir':
@@ -78,6 +80,43 @@ def anios_punto5():
         case 5:
             anios.append(2015,2016,2017,2018)
     return anios
+
+def proyectos_sin_repetir(proyectos:dict):
+    proyectos_no_repetidos = set()
+    for anio in proyectos.values():
+        for gran_area in anio.values():
+            for area in gran_area.values():
+                for proyecto_particular in area:
+                    proyectos_no_repetidos.add(proyecto_particular)
+    return proyectos_no_repetidos
+
+def porcentaje_hombres_mujeres(proyectos:dict):
+    proyectos = proyectos_sin_repetir(proyectos)
+    mujeres = 0
+    hombres = 0
+    for proyecto_particular in proyectos:
+        if proyecto_particular.cantidad_miembros_F != '':
+            mujeres += int(proyecto_particular.cantidad_miembros_F)
+        if proyecto_particular.cantidad_miembros_M != '':
+            hombres += int(proyecto_particular.cantidad_miembros_M)
+    total = hombres + mujeres
+    porcentaje_hombres = (hombres/total)*100
+    porcentaje_mujeres = (mujeres/total)*100
+    return porcentaje_mujeres , porcentaje_hombres
+
+# def piechartpunto2(proyecto:dict):
+#     mujeres, hombres = porcentaje_hombres_mujeres(proyecto)
+#     porcentajes = np.array([hombres,mujeres])
+#     labels = ["Hombres", "Mujeres"]
+#     explode = [0.1,0]
+#     colores = ['b','r']
+#     titulo = 'Porcentajes de hombres y mujeres involucrados en proyectos'
+#     plt.pie(porcentajes, explode = explode, startangle = 90, shadow = True, colors = colores)
+#     plt.legend(labels)
+#     plt.title(titulo, loc = 'center', pad = 20)
+#     print('El porcentaje de participacion de mujeres es: ', mujeres, '%')
+#     print ('El porcentaje de participacion de hombres es: ', hombres, '%')
+#     plt.show() 
 
 
 if __name__ == '__main__':

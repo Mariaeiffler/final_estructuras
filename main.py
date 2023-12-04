@@ -1,8 +1,6 @@
 from FuncionesFinal import *
 from Arbol import *
 from Lectura_archivos import *
-import numpy as np
-# import matplotlib.pyplot as plt
 import sys
 sys.setrecursionlimit(5000)
 
@@ -22,11 +20,11 @@ class Trabajo():
             match pregunta:
                 case 1:
                     '''Mostrar la distribución de los proyectos por área de investigación y sus correspondientes sub áreas'''
-                    print(proyectos.get('2018'))
                     pregunta=menuPPL()
                 case 2:
                     '''Visualizar el porcentaje de participación de las mujeres versus la participación de los hombres en los diferentes proyectos'''
-                    print(self.porcentaje_hombres_mujeres())
+                    print(porcentaje_hombres_mujeres(self.proyectos))
+                    # piechartpunto2(self.proyectos)
                     pregunta=menuPPL()
                 case 3:
                     '''Visualizar el tiempo promedio de terminación de los proyectos según el sub área al que pertenecen'''
@@ -45,32 +43,7 @@ class Trabajo():
                     pregunta=menuPPL()
                 case 7:
                     seguir=False   
-        print('Se ha cerrado el programa con éxito.')
-
-    def proyectos_sin_repetir(self):
-        proyectos = self.proyectos
-        proyectos_no_repetidos = set()
-        for anio in proyectos.values():
-            for gran_area in anio.values():
-                for area in gran_area.values():
-                    for proyecto_particular in area:
-                        proyectos_no_repetidos.add(proyecto_particular)
-        return proyectos_no_repetidos
-        
-
-    def porcentaje_hombres_mujeres(self):
-        proyectos = self.proyectos_sin_repetir()
-        mujeres = 0
-        hombres = 0
-        for proyecto_particular in proyectos:
-            if proyecto_particular.cantidad_miembros_F != '':
-                mujeres += int(proyecto_particular.cantidad_miembros_F)
-            if proyecto_particular.cantidad_miembros_M != '':
-                hombres += int(proyecto_particular.cantidad_miembros_M)
-        total = hombres + mujeres
-        porcentaje_hombres = (hombres/total)*100
-        porcentaje_mujeres = (mujeres/total)*100
-        return porcentaje_mujeres , porcentaje_hombres
+        print('Se ha cerrado el programa con éxito.')        
     
 def obtener_pickle(): #cambiar cuando sepamos 
     try:
