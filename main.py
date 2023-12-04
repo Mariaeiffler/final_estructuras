@@ -3,8 +3,13 @@ from Arbol import *
 from Lectura_archivos import *
 
 class Trabajo():
-    def __init__(self):
-        self.moneda,self.tipo_proy,self.estado,self.disciplina,self.proyectos,self.arbol=diccionario_proy()
+    def __init__(self,moneda,tipo_proy,estado,disciplina,proyectos,arbol):
+        self.moneda=moneda
+        self.tipo_proy=tipo_proy
+        self.estado=estado
+        self.disciplina=disciplina
+        self.proyectos=proyectos
+        self.arbol=diccionario_proy()
 
     def entrar(self): 
         obtener_pickle(self, 'abrir') 
@@ -57,5 +62,6 @@ class Trabajo():
         return porcentaje_mujeres , porcentaje_hombres
         
 if __name__ == "__main__":
-    trabajo=Trabajo()
+    moneda,tipo_proy,estado,disciplina,proyectos,arbol=diccionario_proy()
+    trabajo=Trabajo(moneda,tipo_proy,estado,disciplina,proyectos,arbol)
     trabajo.entrar()
