@@ -96,18 +96,7 @@ def crear_diccionario_proy_vacio(disciplina:dict):
         '2016':{},
         '2017':{},
         '2018':{}}
-    setGranAreas=set()
-    lista=list()
-    dicc=dict()
-    for key in disciplina:
-        granArea=disciplina.get(key).gran_area_descripcion
-        setGranAreas.add(granArea)
-    for granAreaLlave in setGranAreas:
-        dicc[granAreaLlave]={}
-    for key in disciplina:
-        if disciplina.get(key).area_descripcion not in lista:
-            lista+=disciplina.get(key).gran_area_descripcion
-            dicc[disciplina.get(key).gran_area_descripcion][disciplina.get(key).area_descripcion]=[]
+    dicc,lista_vacia=conseguir_nombres(disciplina)
     for keys in proyectos:
         proyectos[keys]=dicc
     return proyectos
