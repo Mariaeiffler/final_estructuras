@@ -60,35 +60,22 @@ class Trabajo():
         porcentaje_mujeres = (mujeres/total)*100
         return porcentaje_mujeres , porcentaje_hombres
     
-def obtener_pickle(accion,trabajo=None): #cambiar cuando sepamos 
-    if accion == 'abrir':
-        try:
-            # trabajo = Trabajo(None,None,None,None,None,None)
-            with open ('final.pickle','rb') as fpickle:
-                trabajo = pickle.load(fpickle)
-            # trabajo.proyectos=info.proyectos
-            # trabajo.arbol=info.arbol
-            # trabajo.moneda=info.moneda
-            # trabajo.tipo_proy=info.tipo_proy
-            # trabajo.estado=info.estado
-            # trabajo.disciplina=info.disciplina
-            #agregar las cosas a cargar
+def obtener_pickle(): #cambiar cuando sepamos 
+    try:
+        with open ('final.pickle','rb') as fpickle:
+            trabajo = pickle.load(fpickle)
+        #agregar las cosas a cargar
 
-        except FileNotFoundError:
-            moneda,tipo_proy,estado,disciplina,proyectos,arbol=diccionario_proy()
-            trabajo=Trabajo(moneda,tipo_proy,estado,disciplina,proyectos,arbol)
-            with open ('final.pickle','wb') as fpickle:
-                pickle.dump(trabajo,fpickle)
-        return trabajo
-    # else:
-    #     with open ('final.pickle','wb') as fpickle:
-    #         pickle.dump(trabajo,fpickle)
+    except FileNotFoundError:
+        moneda,tipo_proy,estado,disciplina,proyectos,arbol=diccionario_proy()
+        trabajo=Trabajo(moneda,tipo_proy,estado,disciplina,proyectos,arbol)
+        with open ('final.pickle','wb') as fpickle:
+            pickle.dump(trabajo,fpickle)
+    return trabajo
+
     
         
 if __name__ == "__main__":
-    trabajo = obtener_pickle('abrir')
-    trabajo.entrar()
-    print(trabajo.proyectos)
-    print(trabajo.porcentaje_hombres_mujeres())
-    # obtener_pickle('cerrar',trabajo)
+    obtener_pickle().entrar()
+
 
