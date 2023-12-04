@@ -57,8 +57,9 @@ def crear_clase_tipo_proyecto(lista):
         tipo_proy[list[0]]=tipo
     return tipo_proy
 
-def crear_clase_proyecto(lista,moneda:dict,tipo_proy:dict,estado:dict,anio,disciplina:dict,proyectos:dict,arbol):
+def crear_clase_proyecto(lista,moneda:dict,tipo_proy:dict,estado:dict,anio,disciplina:dict,proyectos:dict):
     lista_disciplinas = leer_archivo('proyecto_disciplina.csv')
+    arbol=Arbol()
     for proyecto in lista:
         for mon in moneda:
             if proyecto[6]==mon:
@@ -95,38 +96,27 @@ def crear_diccionario_proy_vacio(disciplina:dict):
         '2016':{},
         '2017':{},
         '2018':{}}
-    setGranAreas=set()
-    lista=list()
-    dicc=dict()
-    arbol = Arbol()
-    for key in disciplina:
-        granArea=disciplina.get(key).gran_area_descripcion
-        setGranAreas.add(granArea)
-    for granAreaLlave in setGranAreas:
-        dicc[granAreaLlave]={}
-    for key in disciplina:
-        if disciplina.get(key).area_descripcion not in lista:
-            lista+=disciplina.get(key).gran_area_descripcion
-            dicc[disciplina.get(key).gran_area_descripcion][disciplina.get(key).area_descripcion]=[]
+    dicc,lista_vacia=conseguir_nombres(disciplina)
     for keys in proyectos:
         proyectos[keys]=dicc
-    return proyectos, arbol
+    return proyectos
 
 def diccionario_proy():
     moneda = crear_clase_moneda(leer_archivo('ref_moneda.csv'))
     tipo_proy = crear_clase_tipo_proyecto(leer_archivo('ref_tipo_proyecto.csv'))
     estado = crear_clase_estado_proyecto(leer_archivo('ref_estado_proyecto.csv'))
     disciplina = crear_clase_disciplina(leer_archivo('ref_disciplina.csv')) 
-    proyectosDicc, arbol=crear_diccionario_proy_vacio(disciplina)
+    proyectosDicc=crear_diccionario_proy_vacio(disciplina)
     anio = 2015
     while anio <= 2018:
         nombre = 'proyectos_'+str(anio)+'.csv'
-        proyectos,arbol=crear_clase_proyecto(leer_archivo(nombre),moneda,tipo_proy,estado,str(anio),disciplina,proyectosDicc,arbol)
+        proyectos,arbol=crear_clase_proyecto(leer_archivo(nombre),moneda,tipo_proy,estado,str(anio),disciplina,proyectosDicc)
         anio +=1
     return moneda,tipo_proy,estado,disciplina,proyectos,arbol
 
 if __name__=='__main__':
-    moneda,tipo_proy,estado,disciplina,proyectos,arbol = diccionario_proy()
+    arbol=Arbol(None)
+    dicc, arb = diccionario_proy()
     anios = [2015,2016]
-    arbol.recorrer_en_orden(anios)
+    arb.recorrer_en_orden(anios)
 

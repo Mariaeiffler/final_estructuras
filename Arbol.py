@@ -19,31 +19,23 @@ class Arbol:
             else:
                 raiz.derecha = self._insertar(raiz.derecha, valor)
         return raiz
-    
-    # def printear(self):
-    #     self._printear(self.raiz)
-    #     print()
-
-    # def _printear(self, raiz):
-    #     if raiz:
-    #         self._printear(raiz.izquierda)
-    #         print(raiz.valor, end=' ')
-    #         self._printear(raiz.derecha)
 
     def recorrer_en_orden(self,anios):
         lista = []
         lista = self._recorrer_en_orden(self.raiz,anios,lista)
-        with open('Proyecto_por_fecha.txt', "w") as archivo:
-            for proyecto in lista:
-                archivo.write(proyecto.__str__())
-                archivo.write('\n')
+        try:
+            with open('Proyecto_por_fecha.txt', "w") as archivo:
+                for proyecto in lista:
+                    archivo.write(proyecto.__str__())
+                    archivo.write('\n')
+        except Exception:
+            pass
         
         print()
 
     def _recorrer_en_orden(self, raiz, anios, lista):
         if raiz:
             for anio in anios:
-                print(raiz.valor)
                 if convertirfecha_datetime(raiz.valor.fecha_inicio).year == anio:
                     self._recorrer_en_orden(raiz.izquierda,anios,lista)
                     lista.append(raiz.valor)
