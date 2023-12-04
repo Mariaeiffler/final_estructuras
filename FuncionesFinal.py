@@ -43,6 +43,7 @@ def convertirfecha_datetime(fecha):
             print('no se convirtio')
             
 def anios_punto5():
+    '''Esta funcion pide los años que se quieren visualizar en el punto 5 del menu.'''
     pregunta=input(('Elija de que anios quiere ver los proyectos: \n 1. 2015  \n 2. 2016 \n 3. 2017 \n 4. 2018 \n 5. todos \n'))
     imprimir = 'Error. Elija de que anios quiere ver los proyectos: \n 1. 2015  \n 2. 2016 \n 3. 2017 \n 4. 2018 \n 5. todos \n'
     pregunta=val_opc(pregunta,1,5,imprimir)
@@ -65,6 +66,7 @@ def anios_punto5():
     return anios
 
 def proyectos_sin_repetir(proyectos:dict):
+    '''Esta funcion crea un set con todos los proyectos. Se suele usar para sacar los proyectos que estan repetidos en el diccionario de proyectos.'''
     proyectos_no_repetidos = set()
     for anio in proyectos.values():
         for gran_area in anio.values():
@@ -74,6 +76,7 @@ def proyectos_sin_repetir(proyectos:dict):
     return proyectos_no_repetidos
 
 def porcentaje_hombres_mujeres(proyectos:dict):
+    '''Esta funcion calcula el porcentaje de hombres y mujeres trabajando en todos los proyectos. Se utiliza para el punto 2 del menu.'''
     proyectos = proyectos_sin_repetir(proyectos)
     mujeres = 0
     hombres = 0
@@ -89,6 +92,9 @@ def porcentaje_hombres_mujeres(proyectos:dict):
 
 
 def conseguir_nombres(disciplina:dict):
+    '''Esta funcion crea el diccionario de diccionarios ordenado por area y subarea, que despues se agrega al diccionario de proyectos según el año
+    y crea una lista con la descripcion de las subareas. Para lograr esto se utiliza un set para que las gran areas no se repitan y se cree el diccionario
+    correctamente cuando se quiera utilizar la descripcion como llave. '''
     setGranAreas=set()
     lista=list()
     dicc=dict()
@@ -106,6 +112,8 @@ def conseguir_nombres(disciplina:dict):
     return dicc,lista_subareas
 
 def relacion_monto(proyectos:dict):
+    '''Esta función realiza el punto 6 del menu. Crea un archivo con la relación de monto solicitado y otorgado, recorriendo el 
+    set que contiene los proyectos, obteniendo de los distintos objetos los valores necesitados e visualizandolos en un txt'''
     proyectos = proyectos_sin_repetir(proyectos)
     monto_solicitado = 0
     monto_otorgado = 0
@@ -127,6 +135,9 @@ def relacion_monto(proyectos:dict):
         pass
     
 def visualizar_tiempo_promedio(trabajo):
+    '''Esta funcion realiza el punto 3 del menu. Permite visualizar el tiempo promedio que tarda el proyecto seleccionado en 
+    en dias en realizarse. Utiliza datetime para poder convertir las fechas al formato necesario y hacer la diferencia. Los resultados
+    se imprimen en un archivo de formato txt.'''
     diccionario=trabajo.proyectos
     contador=0
     diferencia=0
@@ -140,7 +151,7 @@ def visualizar_tiempo_promedio(trabajo):
         diccionario_nombre[contador2] = nombre_subarea
         contador2+=1
     clave=input("\nIngrese el subarea que desea conocer su tiempo promedio de duracion\n")
-    val_opc(clave,1,43,imprimir)
+    clave=val_opc(clave,1,43,imprimir)
     subarea=diccionario_nombre[int(clave)]
     for año in diccionario.values():
         
@@ -163,11 +174,12 @@ def visualizar_tiempo_promedio(trabajo):
         tiempo_prom=diferencia/contador
         try:
             with open('Tiempo_promedio.txt', "w") as archivo:
-                archivo.write(f"El tiempo promedio del subarea {subarea} es de {tiempo_prom} dias")
+                archivo.write(f"El tiempo promedio del subarea '{subarea}' es de {tiempo_prom} dias")
         except Exception:
             pass
 
 def tecnologias_emergentes(proyectos:dict):
+    '''Esta funcion hace el punto '''
     proyectos = proyectos_sin_repetir(proyectos)
     lista = []
     for proy in proyectos:
