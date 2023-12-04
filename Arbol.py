@@ -1,6 +1,7 @@
 from Proyecto import *
 from FuncionesFinal import *
 from Nodo import *
+from datetime import *
 
 class Arbol:
     def __init__(self,raiz=None):
@@ -19,15 +20,17 @@ class Arbol:
                 raiz.derecha = self._insertar(raiz.derecha, valor)
         return raiz
 
-    def recorrer_en_orden(self):
-        self._recorrer_en_orden(self.raiz)
+    def recorrer_en_orden(self,anios):
+        self._recorrer_en_orden(self.raiz,anios)
         print()
 
-    def _recorrer_en_orden(self, raiz):
+    def _recorrer_en_orden(self, raiz, anios):
         if raiz:
-            self._recorrer_en_orden(raiz.izquierda)
-            print(raiz.valor, end='\n')
-            self._recorrer_en_orden(raiz.derecha)
+            for anio in anios:
+                if convertirfecha_datetime(raiz.valor.fecha_inicio).year == anio:
+                    self._recorrer_en_orden(raiz.izquierda)
+                    print(raiz.valor, end='\n')
+                    self._recorrer_en_orden(raiz.derecha)
             
             
 
