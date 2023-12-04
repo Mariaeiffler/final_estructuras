@@ -62,7 +62,7 @@ def anios_punto5():
     return anios
 
 def proyectos_sin_repetir(proyectos:dict):
-    '''Esta funcion crea un set con todos los proyectos. Se suele usar para sacar los proyectos que estan repetidos en el diccionario de proyectos.'''
+    '''Esta funcion crea un set con todos los proyectos. Se suele usar para sacar los proyectos que estan repetidos en el diccionario que almacena todos los proyectos.'''
     proyectos_no_repetidos = set()
     for anio in proyectos.values():
         for gran_area in anio.values():
@@ -88,7 +88,7 @@ def porcentaje_hombres_mujeres(proyectos:dict):
 
 
 def conseguir_nombres(disciplina:dict):
-    '''Esta funcion crea el diccionario de diccionarios ordenado por area y subarea, que despues se agrega al diccionario de proyectos según el año
+    '''Esta funcion crea el diccionario de diccionarios ordenado por area y subarea, que después se agrega al diccionario de proyectos según el año
     y crea una lista con la descripcion de las subareas. Para lograr esto se utiliza un set para que las gran areas no se repitan y se cree el diccionario
     correctamente cuando se quiera utilizar la descripcion como llave. '''
     setGranAreas=set()
@@ -131,8 +131,8 @@ def relacion_monto(proyectos:dict):
         pass
     
 def visualizar_tiempo_promedio(trabajo):
-    '''Esta funcion realiza el punto 3 del menu. Permite visualizar el tiempo promedio que tarda el proyecto seleccionado en 
-    en dias en realizarse. Utiliza datetime para poder convertir las fechas al formato necesario y hacer la diferencia. Los resultados
+    '''Esta funcion realiza el punto 3 del menu. Permite visualizar el tiempo promedio que tarda el proyecto seleccionado, 
+    en dias, en realizarse. Utiliza datetime para poder convertir las fechas al formato necesario y hacer la diferencia. Los resultados
     se imprimen en un archivo de formato txt.'''
     diccionario=trabajo.proyectos
     contador=0
@@ -175,7 +175,8 @@ def visualizar_tiempo_promedio(trabajo):
             pass
 
 def tecnologias_emergentes(proyectos:dict):
-    '''Esta funcion hace el punto '''
+    '''Esta funcion hace el punto 4. Permite visualizar el porcentaje de proyectos que utilizaron tecnologias emergentes
+    usando listas y haciendo el calculo con los tamaños de las listas.'''
     proyectos = proyectos_sin_repetir(proyectos)
     lista = []
     for proy in proyectos:
@@ -189,6 +190,9 @@ def tecnologias_emergentes(proyectos:dict):
         pass
     
 def porcentaje_areas(trabajo):
+    '''Esta funcion te da el porcentaje de cada area de los distintos proyectos. Para lograrlo, se utiliza un set para conseguir los proyectos
+    sin repetirse, numpy para obtener los vectores con las respectivas cantidades y para poder calcular los porcentajes. La funcion devuelve los 
+    porcentajes y una lista con con las distintas areas (para facilitar el dibujo del gráfico correspondiente).'''
     lista_listas = []
     lista_areas = []
     cantidades = []
@@ -214,6 +218,9 @@ def porcentaje_areas(trabajo):
     return porcentajes, lista_areas
 
 def porcentaje_subareas(trabajo):
+    '''Esta funcion te da el porcentaje de proyectos en las distintas subareas. Recorre el diccionario proyectos para obtener la cantidad de 
+    proyectos segun las subareas en el area ingresada y se utiliza numpy para generar el vector con las cantidades para poder calcular el porcentaje. La 
+    funcion devuelve un str de la gran area que se esta analizando, una lista con las descripciones de las subareas y el porcentaje como un array. '''
     lista_listas = []
     lista_subareas = []
     cantidades = []
@@ -252,6 +259,7 @@ def porcentaje_subareas(trabajo):
     return porcentajes, lista_subareas, g_area
 
 def piecharts_subareas(trabajo):
+    '''Esta funcion grafica los resultados de los porcentajes de proyectos en las distintas subareas utilizando la librería matplot.'''
     porcentajes, lista_subareas, area = porcentaje_subareas(trabajo)
     titulo = "Distribucion de los proyectos segun el subarea de investigacion del area:" + area
     piechart = plt.pie(porcentajes, labels = lista_subareas,  startangle = 90)
@@ -260,6 +268,7 @@ def piecharts_subareas(trabajo):
     plt.show()
     
 def piechartpunto1(trabajo):
+    '''Esta funcion grafica los resultados de los porcentajes en las distintas gran areas utilizando la librería matplot.'''
     porcentajes, lista_areas = porcentaje_areas(trabajo)
     titulo = "Distribución de los proyectos por Area de investigación"
     plt.pie(porcentajes, labels = lista_areas,  startangle = 180,autopct='%1.1f%%', pctdistance=0.85)
@@ -267,6 +276,7 @@ def piechartpunto1(trabajo):
     plt.show()
     
 def piechartpunto2(proyectos:dict):
+    '''Esta funcion grafica los resultados de los porcentajes de hombres y mujeres en los proyectos utilizando la librería matplot.'''
     mujeres, hombres = porcentaje_hombres_mujeres(proyectos)
     porcentajes = np.array([hombres,mujeres])
     labels = ["Hombres", "Mujeres"]
