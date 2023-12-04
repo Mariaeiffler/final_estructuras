@@ -1,6 +1,8 @@
 from FuncionesFinal import *
 from Arbol import *
 from Lectura_archivos import *
+import sys
+sys.setrecursionlimit(5000)
 
 class Trabajo():
     def __init__(self,moneda,tipo_proy,estado,disciplina,proyectos,arbol):
@@ -9,10 +11,9 @@ class Trabajo():
         self.estado=estado
         self.disciplina=disciplina
         self.proyectos=proyectos
-        self.arbol=diccionario_proy()
-
-    def entrar(self): 
-        obtener_pickle(self, 'abrir') 
+        self.arbol=arbol
+        
+    def entrar(self):  
         seguir = True
         pregunta=menuPPL()
         while seguir==True: 
@@ -40,8 +41,6 @@ class Trabajo():
                     pregunta=menuPPL()
                 case 7:
                     seguir=False   
-                           
-        obtener_pickle(self, 'cerrar') 
         print('Se ha cerrado el programa con éxito.')
 
     def porcentaje_hombres_mujeres(self):
@@ -60,8 +59,36 @@ class Trabajo():
         porcentaje_hombres = (hombres/total)*100
         porcentaje_mujeres = (mujeres/total)*100
         return porcentaje_mujeres , porcentaje_hombres
+    
+def obtener_pickle(accion,trabajo=None): #cambiar cuando sepamos 
+    if accion == 'abrir':
+        try:
+            # trabajo = Trabajo(None,None,None,None,None,None)
+            with open ('final.pickle','rb') as fpickle:
+                trabajo = pickle.load(fpickle)
+            # trabajo.proyectos=info.proyectos
+            # trabajo.arbol=info.arbol
+            # trabajo.moneda=info.moneda
+            # trabajo.tipo_proy=info.tipo_proy
+            # trabajo.estado=info.estado
+            # trabajo.disciplina=info.disciplina
+            #agregar las cosas a cargar
+
+        except FileNotFoundError:
+            moneda,tipo_proy,estado,disciplina,proyectos,arbol=diccionario_proy()
+            trabajo=Trabajo(moneda,tipo_proy,estado,disciplina,proyectos,arbol)
+            with open ('final.pickle','wb') as fpickle:
+                pickle.dump(trabajo,fpickle)
+        return trabajo
+    # else:
+    #     with open ('final.pickle','wb') as fpickle:
+    #         pickle.dump(trabajo,fpickle)
+    
         
 if __name__ == "__main__":
-    moneda,tipo_proy,estado,disciplina,proyectos,arbol=diccionario_proy()
-    trabajo=Trabajo(moneda,tipo_proy,estado,disciplina,proyectos,arbol)
+    trabajo = obtener_pickle('abrir')
     trabajo.entrar()
+    print(trabajo.proyectos)
+    print(trabajo.porcentaje_hombres_mujeres())
+    # obtener_pickle('cerrar',trabajo)
+

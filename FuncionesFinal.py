@@ -16,6 +16,8 @@ def obtener_pickle(trabajo, accion): #cambiar cuando sepamos
 
         except FileNotFoundError:
             with open ('final.pickle','wb') as fpickle:
+                moneda,tipo_proy,estado,disciplina,proyectos,arbol=diccionario_proy()
+                trabajo=Trabajo(moneda,tipo_proy,estado,disciplina,proyectos,arbol)
                 pickle.dump(trabajo,fpickle)
     else:
         with open ('final.pickle','wb') as fpickle:
