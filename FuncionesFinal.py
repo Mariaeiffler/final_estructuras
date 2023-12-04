@@ -136,6 +136,68 @@ def conseguir_nombres(disciplina:dict):
             lista_subareas.append(disciplina.get(key).area_descripcion)
     return dicc,lista_subareas
 
+def relacion_monto(proyectos:dict):
+    proyectos = proyectos_sin_repetir(proyectos)
+    monto_solicitado = 0
+    monto_otorgado = 0
+    for proy in proyectos:
+        monto_solicitado += float(proy.monto_financiado_solicitado)
+        monto_otorgado += float(proy.monto_financiado_adjudicado)
+    relacion = monto_otorgado/monto_solicitado
+    try:
+        with open('Relación_montos.txt', "w") as archivo:
+            archivo.write('El monto total solicitado es: ')
+            archivo.write(str(monto_solicitado))
+            archivo.write('\n')
+            archivo.write('El monto total otorgado es: ')
+            archivo.write(str(monto_otorgado))
+            archivo.write('\n')
+            archivo.write('La relacion entre el monto otorgado y solicitado es: ')
+            archivo.write(str(relacion))
+    except Exception:
+        pass
+    
+def visualizar_tiempo_promedio(trabajo):
+    diccionario=trabajo.proyectos
+    contador=0
+    diferencia=0
+    contador2=1
+    diccionario_nombre={}
+    imprimir="Error. Ingrese una opcion valida \n"
+    no_uso,lista_nombres=conseguir_nombres(trabajo.disciplina)
+    print("Las posibles subareas son:")
+    for nombre_subarea in lista_nombres:
+        print(f"{contador2}. {nombre_subarea}")
+        diccionario_nombre[contador2] = nombre_subarea
+        contador2+=1
+    clave=input("\nIngrese el subarea que desea conocer su tiempo promedio de duracion\n")
+    val_opc(clave,1,43,imprimir)
+    subarea=diccionario_nombre[int(clave)]
+    for año in diccionario.values():
+        
+        for gran_area in año.values():
+            
+            for area in gran_area:
+
+                if subarea==area:
+                    
+                    lista_proyectos = gran_area[area]
+                    for proyectos in lista_proyectos:
+                        dif=0
+                        fecha_inicio=datetime.strptime(proyectos.fecha_inicio, "%Y/%m/%d %H:%M:%S.%f")
+                        fecha_final=datetime.strptime(proyectos.fecha_finalizacion, "%Y/%m/%d %H:%M:%S.%f")
+                        dif=fecha_final-fecha_inicio
+
+                        diferencia+=int(dif.days)
+                        contador+=1
+    if contador!=0:
+        tiempo_prom=diferencia/contador
+        try:
+            with open('Tiempo_promedio.txt', "w") as archivo:
+                archivo.write(f"El tiempo promedio del subarea {subarea} es de {tiempo_prom} dias")
+        except Exception:
+            pass
+
 
 if __name__ == '__main__':
     print(menuPPL())
