@@ -3,7 +3,7 @@ from Arbol import *
 from Lectura_archivos import *
 from datetime import datetime as dt
 import sys
-sys.setrecursionlimit(5000)
+sys.setrecursionlimit(5000) #para solucionar un problema de RecursionError al usar pickle 
 
 class Trabajo():
     def __init__(self,moneda,tipo_proy,estado,disciplina,proyectos,arbol):
@@ -59,7 +59,9 @@ class Trabajo():
 
     
    
-def obtener_pickle(): #cambiar cuando sepamos 
+def obtener_pickle(): 
+    '''Esta funcion en la primera ejecucion crea el objeto a traves de los archivos y lo guarda en el pickle, mientras que en las siguientese ejecuciones
+    crea el objeto a traves del pickle'''
     try:
         with open ('final.pickle','rb') as fpickle:
             trabajo = pickle.load(fpickle)
