@@ -19,6 +19,16 @@ class Arbol:
             else:
                 raiz.derecha = self._insertar(raiz.derecha, valor)
         return raiz
+    
+    # def printear(self):
+    #     self._printear(self.raiz)
+    #     print()
+
+    # def _printear(self, raiz):
+    #     if raiz:
+    #         self._printear(raiz.izquierda)
+    #         print(raiz.valor, end=' ')
+    #         self._printear(raiz.derecha)
 
     def recorrer_en_orden(self,anios):
         lista = []
@@ -33,6 +43,7 @@ class Arbol:
     def _recorrer_en_orden(self, raiz, anios, lista):
         if raiz:
             for anio in anios:
+                print(raiz.valor)
                 if convertirfecha_datetime(raiz.valor.fecha_inicio).year == anio:
                     self._recorrer_en_orden(raiz.izquierda,anios,lista)
                     lista.append(raiz.valor)

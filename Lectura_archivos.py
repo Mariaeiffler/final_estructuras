@@ -57,9 +57,8 @@ def crear_clase_tipo_proyecto(lista):
         tipo_proy[list[0]]=tipo
     return tipo_proy
 
-def crear_clase_proyecto(lista,moneda:dict,tipo_proy:dict,estado:dict,anio,disciplina:dict,proyectos:dict):
+def crear_clase_proyecto(lista,moneda:dict,tipo_proy:dict,estado:dict,anio,disciplina:dict,proyectos:dict,arbol):
     lista_disciplinas = leer_archivo('proyecto_disciplina.csv')
-    arbol=Arbol()
     for proyecto in lista:
         for mon in moneda:
             if proyecto[6]==mon:
@@ -99,6 +98,7 @@ def crear_diccionario_proy_vacio(disciplina:dict):
     setGranAreas=set()
     lista=list()
     dicc=dict()
+    arbol = Arbol()
     for key in disciplina:
         granArea=disciplina.get(key).gran_area_descripcion
         setGranAreas.add(granArea)
@@ -110,24 +110,23 @@ def crear_diccionario_proy_vacio(disciplina:dict):
             dicc[disciplina.get(key).gran_area_descripcion][disciplina.get(key).area_descripcion]=[]
     for keys in proyectos:
         proyectos[keys]=dicc
-    return proyectos
+    return proyectos, arbol
 
 def diccionario_proy():
     moneda = crear_clase_moneda(leer_archivo('ref_moneda.csv'))
     tipo_proy = crear_clase_tipo_proyecto(leer_archivo('ref_tipo_proyecto.csv'))
     estado = crear_clase_estado_proyecto(leer_archivo('ref_estado_proyecto.csv'))
     disciplina = crear_clase_disciplina(leer_archivo('ref_disciplina.csv')) 
-    proyectosDicc=crear_diccionario_proy_vacio(disciplina)
+    proyectosDicc, arbol=crear_diccionario_proy_vacio(disciplina)
     anio = 2015
     while anio <= 2018:
         nombre = 'proyectos_'+str(anio)+'.csv'
-        proyectos,arbol=crear_clase_proyecto(leer_archivo(nombre),moneda,tipo_proy,estado,str(anio),disciplina,proyectosDicc)
+        proyectos,arbol=crear_clase_proyecto(leer_archivo(nombre),moneda,tipo_proy,estado,str(anio),disciplina,proyectosDicc,arbol)
         anio +=1
     return moneda,tipo_proy,estado,disciplina,proyectos,arbol
 
 if __name__=='__main__':
-    arbol=Arbol(None)
-    dicc, arb = diccionario_proy()
+    moneda,tipo_proy,estado,disciplina,proyectos,arbol = diccionario_proy()
     anios = [2015,2016]
-    arb.recorrer_en_orden(anios)
+    arbol.recorrer_en_orden(anios)
 

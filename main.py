@@ -26,7 +26,10 @@ class Trabajo():
                     pregunta=menuPPL()
                 case 5:
                     '''Guardar y visualizar una lista de proyectos ordenados por la fecha de inicialización'''
+                    anios = anios_punto5()
+                    self.arbol.recorrer_en_orden(anios)
                     pregunta=menuPPL()
+                    
                 case 6:
                     '''Visualizar la relación entre el monto de financiamiento solicitado y el monto de financiamiento otorgado'''
                     pregunta=menuPPL()
