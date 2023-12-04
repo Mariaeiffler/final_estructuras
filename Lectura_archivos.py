@@ -127,6 +127,5 @@ def diccionario_proy():
 
 if __name__=='__main__':
     moneda,tipo_proy,estado,disciplina,proyectos,arbol = diccionario_proy()
-    anios = [2015,2016]
-    arbol.recorrer_en_orden(anios)
+    print(proyectos)
 

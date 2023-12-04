@@ -19,6 +19,7 @@ class Trabajo():
             match pregunta:
                 case 1:
                     '''Mostrar la distribución de los proyectos por área de investigación y sus correspondientes sub áreas'''
+                    print(proyectos.get('2018'))
                     pregunta=menuPPL()
                 case 2:
                     '''Visualizar el porcentaje de participación de las mujeres versus la participación de los hombres en los diferentes proyectos'''
