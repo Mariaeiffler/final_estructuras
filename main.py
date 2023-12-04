@@ -32,11 +32,29 @@ class Trabajo():
                     pregunta=menuPPL()
                 case 7:
                     seguir=False   
-
-                                   
+                           
         obtener_pickle(self, 'cerrar') 
         print('Se ha cerrado el programa con éxito.')
+
+    def porcentaje_hombres_mujeres(self):
+        proyectos = self.proyectos
+        mujeres = 0
+        hombres = 0
+        for anio in proyectos.values():
+            for gran_area in anio.values():
+                for area in gran_area.values():
+                    for proyecto_particular in area:
+                        if proyecto_particular.cantidad_miembros_F != '':
+                            mujeres += int(proyecto_particular.cantidad_miembros_F)
+                        if proyecto_particular.cantidad_miembros_M != '':
+                            hombres += int(proyecto_particular.cantidad_miembros_M)
+        total = hombres + mujeres
+        porcentaje_hombres = (hombres/total)*100
+        porcentaje_mujeres = (mujeres/total)*100
+        return porcentaje_mujeres , porcentaje_hombres
         
 if __name__ == "__main__":
     trabajo=Trabajo()
-    print (trabajo.proyectos)
+    #print (trabajo.proyectos)
+    porcentaje_mujeres , porcentaje_hombres = trabajo.porcentaje_hombres_mujeres()
+    print(porcentaje_mujeres,porcentaje_hombres)
