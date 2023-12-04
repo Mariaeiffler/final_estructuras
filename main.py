@@ -1,8 +1,7 @@
 from FuncionesFinal import *
 from Arbol import *
 from Lectura_archivos import *
-import numpy as np
-import matplotlib.pyplot as plt
+from datetime import datetime as dt
 import sys
 sys.setrecursionlimit(5000)
 
@@ -27,24 +26,30 @@ class Trabajo():
                     pregunta=menuPPL()
                 case 2:
                     '''Visualizar el porcentaje de participación de las mujeres versus la participación de los hombres en los diferentes proyectos'''
-                    self.porcentaje_hombres_mujeres()
-                    piechartpunto2(self)
+                    print(porcentaje_hombres_mujeres(self.proyectos))
+                    # piechartpunto2(self.proyectos)
                     pregunta=menuPPL()
                     
                 case 3:
                     '''Visualizar el tiempo promedio de terminación de los proyectos según el sub área al que pertenecen'''
+                    visualizar_tiempo_promedio(self)
+                    print('Se ha creado un archivo con la información que desea visualizar \n')
                     pregunta=menuPPL() 
                 case 4:
                     '''Visualizar el porcentaje de los proyectos que han utilizado tecnologías emergentes'''
+                    tecnologias_emergentes(self.proyectos)
                     pregunta=menuPPL()
                 case 5:
                     '''Guardar y visualizar una lista de proyectos ordenados por la fecha de inicialización'''
                     anios = anios_punto5()
                     self.arbol.recorrer_en_orden(anios)
+                    print('Se ha creado un archivo con la información que desea visualizar \n')
                     pregunta=menuPPL()
                     
                 case 6:
                     '''Visualizar la relación entre el monto de financiamiento solicitado y el monto de financiamiento otorgado'''
+                    relacion_monto(self.proyectos)
+                    print('Se ha creado un archivo con la información que desea visualizar \n')
                     pregunta=menuPPL()
                 case 7:
                     seguir=False   
@@ -127,7 +132,6 @@ def obtener_pickle(): #cambiar cuando sepamos
     try:
         with open ('final.pickle','rb') as fpickle:
             trabajo = pickle.load(fpickle)
-        #agregar las cosas a cargar
 
     except FileNotFoundError:
         moneda,tipo_proy,estado,disciplina,proyectos,arbol=diccionario_proy()
@@ -163,4 +167,5 @@ def piechartpunto2(trabajo):
 
 if __name__ == "__main__":
     obtener_pickle().entrar()
+
     

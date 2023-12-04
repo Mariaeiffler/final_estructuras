@@ -23,10 +23,13 @@ class Arbol:
     def recorrer_en_orden(self,anios):
         lista = []
         lista = self._recorrer_en_orden(self.raiz,anios,lista)
-        with open('Proyecto_por_fecha.txt', "w") as archivo:
-            for proyecto in lista:
-                archivo.write(proyecto.__str__())
-                archivo.write('\n')
+        try:
+            with open('Proyecto_por_fecha.txt', "w") as archivo:
+                for proyecto in lista:
+                    archivo.write(proyecto.__str__())
+                    archivo.write('\n')
+        except Exception:
+            pass
         
         print()
 
