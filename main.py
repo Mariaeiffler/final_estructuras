@@ -3,19 +3,15 @@ from Arbol import *
 from Lectura_archivos import *
 
 class Trabajo():
-    def __init__(self,arbol):
-        self.proyectos, self.arbol=diccionario_proy(arbol)
+    def __init__(self):
+        self.proyectos, self.arbol=diccionario_proy()
 
     def entrar(self): 
         obtener_pickle(self, 'abrir') 
         seguir = True
-        
         pregunta=menuPPL()
-            
         while seguir==True: 
-            
             match pregunta:
-                    
                 case 1:
                     '''Mostrar la distribución de los proyectos por área de investigación y sus correspondientes sub áreas'''
                     pregunta=menuPPL()
@@ -42,6 +38,5 @@ class Trabajo():
         print('Se ha cerrado el programa con éxito.')
         
 if __name__ == "__main__":
-    arbol=Arbol()
-    trabajo=Trabajo(arbol)
+    trabajo=Trabajo()
     print (trabajo.proyectos)
