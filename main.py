@@ -34,6 +34,7 @@ class Trabajo():
                     pregunta=menuPPL() 
                 case 4:
                     '''Visualizar el porcentaje de los proyectos que han utilizado tecnologías emergentes'''
+                    tecnologias_emergentes(self.proyectos)
                     pregunta=menuPPL()
                 case 5:
                     '''Guardar y visualizar una lista de proyectos ordenados por la fecha de inicialización'''

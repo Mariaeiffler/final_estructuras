@@ -3,27 +3,6 @@ from datetime import *
 # import matplotlib.pyplot as plt
 import numpy as np
 
-def obtener_pickle(trabajo, accion): #cambiar cuando sepamos 
-    if accion == 'abrir':
-        try:
-            with open ('final.pickle','rb') as fpickle:
-                info = pickle.load(fpickle)
-            trabajo.proyectos=info.proyectos
-            trabajo.arbol=info.arbol
-            trabajo.moneda=info.moneda
-            trabajo.tipo_proy=info.tipo_proy
-            trabajo.estado=info.estado
-            trabajo.disciplina=info.disciplina
-            #agregar las cosas a cargar
-
-        except FileNotFoundError:
-            with open ('final.pickle','wb') as fpickle:
-                pickle.dump(trabajo,fpickle)
-    else:
-        with open ('final.pickle','wb') as fpickle:
-            pickle.dump(trabajo,fpickle)
-        return
-
 def val_int(x): 
     '''Esta función valida que sea un entero'''
     try:
@@ -197,6 +176,19 @@ def visualizar_tiempo_promedio(trabajo):
                 archivo.write(f"El tiempo promedio del subarea {subarea} es de {tiempo_prom} dias")
         except Exception:
             pass
+
+def tecnologias_emergentes(proyectos:dict):
+    proyectos = proyectos_sin_repetir(proyectos)
+    lista = []
+    for proy in proyectos:
+        if proy.tipo_proyecto_id.tipo_proyecto_cyt_id == '2':
+            lista.append(proy)
+    porcentaje = (len(lista)/len(proyectos))*100
+    try:
+        with open('Tecnologias_emergentes.txt', "w") as archivo:
+            archivo.write(f'El porcentaje de proyectos que usaron tecnologias emergentes es: {porcentaje} %')
+    except Exception:
+        pass
 
 
 if __name__ == '__main__':
